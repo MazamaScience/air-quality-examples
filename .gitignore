@@ -40,6 +40,8 @@ vignettes/*.pdf
 
 # ----- Mazama Science custom -----
 
+*.Rproj
+
 global_vars.R
 
 .DS_Store
