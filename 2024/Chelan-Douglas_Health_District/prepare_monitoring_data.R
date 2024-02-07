@@ -6,6 +6,8 @@
 
 # ----- Setup ------------------------------------------------------------------
 
+VERSION = "1.0.0"
+
 # Check that the working directory is set properly
 if ( !stringr::str_detect(getwd(), "Chelan-Douglas_Health_District$") ) {
   stop("WD_ERROR:  Please set the working directory to 'Chelan-Douglas_Health_District/'")
@@ -19,9 +21,14 @@ library(AirMonitor)
 setSpatialDataDir("~/Data/Spatial")
 loadSpatialData("USCensusCounties")
 
-# Set up logging using MazamaCoreUtils logging functionality
-logger.setup()
+# Use MazamaCoreUtils logging functionality to save logs in the data/ directory
+MazamaCoreUtils::initializeLogging("./data")
 logger.setLevel(TRACE)
+
+logger.info("Running prepare_monitoring_data.R version %s", VERSION)
+
+# Log session info to see package versions
+logger.debug(capture.output(sessionInfo()))
 
 # ----- Internal functions -----------------------------------------------------
 
@@ -73,7 +80,7 @@ for ( year in years ) {
     monitor_filter(countyName %in% countyNames)
   
   if ( monitor_isEmpty(monitor) ) {
-    logger.warn("No data found. Any empty monitor object will be saved.")
+    logger.warn("No AirNow data found in %d. Any empty monitor object will be saved.", year)
   } else {
     monitor <-
       monitor %>%
@@ -102,7 +109,7 @@ for ( year in years ) {
     monitor_filter(countyName %in% countyNames)
   
   if ( monitor_isEmpty(monitor) ) {
-    logger.warn("No data found. Any empty monitor object will be saved.")
+    logger.warn("No AIRSIS data found in %d. Any empty monitor object will be saved.", year)
   } else {
     monitor <-
       monitor %>%
@@ -131,7 +138,7 @@ for ( year in years ) {
     monitor_filter(countyName %in% countyNames)
   
   if ( monitor_isEmpty(monitor) ) {
-    logger.warn("No data found. Any empty monitor object will be saved.")
+    logger.warn("No WRCC data found in %d. Any empty monitor object will be saved.", year)
   } else {
     monitor <-
       monitor %>%
