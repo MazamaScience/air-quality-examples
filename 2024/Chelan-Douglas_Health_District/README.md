@@ -2,7 +2,7 @@
 
 _Last updated on February 7, 2024_
 
-**_NOTE:_** All scripts and markdown documents assume a common working directory.
+**_NOTE:_** All R scripts documents assume a common working directory.
 To run scripts interactively, RStudio users should set the working directory to
 `Chelan-Douglas_Health_District/`.
 
