@@ -95,7 +95,7 @@ for ( year in years ) {
   fileName <- sprintf("%s.rda", objectName)
   filePath <- file.path("./data", fileName)
   logger.info("Saving %s", filePath)
-  save(objectName, file = filePath)
+  save(list = objectName, file = filePath)
   
   # * AIRSIS -------------------------------------------------------------------
   
@@ -124,7 +124,7 @@ for ( year in years ) {
   fileName <- sprintf("%s.rda", objectName)
   filePath <- file.path("./data", fileName)
   logger.info("Saving %s", filePath)
-  save(objectName, file = filePath)
+  save(list = objectName, file = filePath)
   
   # * WRCC ---------------------------------------------------------------------
   
@@ -153,7 +153,7 @@ for ( year in years ) {
   fileName <- sprintf("%s.rda", objectName)
   filePath <- file.path("./data", fileName)
   logger.info("Saving %s", filePath)
-  save(objectName, file = filePath)
+  save(list = objectName, file = filePath)
   
 }
 

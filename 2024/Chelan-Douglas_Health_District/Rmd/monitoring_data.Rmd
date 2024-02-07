@@ -1,0 +1,58 @@
+---
+title: "Chelan-Douglas-Okanogan Monitoring data"
+output:
+  html_document: 
+    css: report_styles.css
+---
+
+Processed on `r paste(lubridate::now(),format(lubridate::now(), "%Z"))`.
+
+----
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, error = FALSE)
+
+suppressPackageStartupMessages({
+  library(MazamaSpatialUtils)
+  library(AirMonitor)
+  library(AirMonitorPlots)
+})
+
+year = 2014
+```
+
+# `r year`
+
+```{r load_data}
+airnow <- get(load(sprintf("../data/airnow_%d.rda", year)))
+airsis <- get(load(sprintf("../data/airsis_%d.rda", year)))
+wrcc <- get(load(sprintf("../data/wrcc_%d.rda", year)))
+```
+
+## Available AirNow data
+
+```{r airnow_map, echo = TRUE, error = TRUE}
+monitor_leaflet(airnow)
+```
+
+## AirNow daily averages
+
+```{r airnow_dailyBarplot}
+startdate <- sprintf("%d0701", year)
+enddate <- sprintf("%d1101", year)
+ggplot_pm25Timeseries(
+  airnow,
+  startdate = startdate,
+  enddate = enddate
+) +
+  ggtitle("Daily average PM2.5") +
+  stat_dailyAQCategory(timezone = "America/Los_Angeles") + 
+  facet_grid(rows = vars(locationName))
+```
+
+
+## TODO
+
+The rest of the report goes here.
+

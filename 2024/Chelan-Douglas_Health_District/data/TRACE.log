@@ -1,123 +1,124 @@
-INFO [2024-02-07 11:03:24] Running prepare_monitoring_data.R version 1.0.0
-DEBUG [2024-02-07 11:03:24] R version 4.2.2 (2022-10-31)
-DEBUG [2024-02-07 11:03:24] Platform: x86_64-apple-darwin17.0 (64-bit)
-DEBUG [2024-02-07 11:03:24] Running under: macOS Ventura 13.6.3
-DEBUG [2024-02-07 11:03:24] 
-DEBUG [2024-02-07 11:03:24] Matrix products: default
-DEBUG [2024-02-07 11:03:24] LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
-DEBUG [2024-02-07 11:03:24] 
-DEBUG [2024-02-07 11:03:24] locale:
-DEBUG [2024-02-07 11:03:24] [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-DEBUG [2024-02-07 11:03:24] 
-DEBUG [2024-02-07 11:03:24] attached base packages:
-DEBUG [2024-02-07 11:03:24] [1] stats     graphics  grDevices utils     datasets  methods   base     
-DEBUG [2024-02-07 11:03:24] 
-DEBUG [2024-02-07 11:03:24] other attached packages:
-DEBUG [2024-02-07 11:03:24] [1] AirMonitor_0.3.12        MazamaSpatialUtils_0.8.6 sf_1.0-12                MazamaCoreUtils_0.5.2   
-DEBUG [2024-02-07 11:03:24] 
-DEBUG [2024-02-07 11:03:24] loaded via a namespace (and not attached):
-DEBUG [2024-02-07 11:03:24]  [1] Rcpp_1.0.10             lubridate_1.9.2         prettyunits_1.1.1       class_7.3-21            ps_1.7.4                geodist_0.0.8          
-DEBUG [2024-02-07 11:03:24]  [7] rprojroot_2.0.3         digest_0.6.31           utf8_1.2.3              mime_0.12               R6_2.5.1                futile.options_1.0.1   
-DEBUG [2024-02-07 11:03:24] [13] e1071_1.7-13            pillar_1.9.0            rlang_1.1.0             curl_5.2.0              rstudioapi_0.14         miniUI_0.1.1.1         
-DEBUG [2024-02-07 11:03:24] [19] callr_3.7.3             urlchecker_1.0.1        desc_1.4.2              devtools_2.4.5          MazamaTimeSeries_0.2.15 stringr_1.5.0          
-DEBUG [2024-02-07 11:03:24] [25] htmlwidgets_1.6.2       proxy_0.4-27            shiny_1.7.4             compiler_4.2.2          httpuv_1.6.9            MazamaRollUtils_0.1.3  
-DEBUG [2024-02-07 11:03:24] [31] pkgconfig_2.0.3         pkgbuild_1.4.0          htmltools_0.5.5         tidyselect_1.2.0        tibble_3.2.1            fansi_1.0.4            
-DEBUG [2024-02-07 11:03:24] [37] crayon_1.5.2            dplyr_1.1.1             withr_2.5.0             later_1.3.0             wk_0.7.2                grid_4.2.2             
-DEBUG [2024-02-07 11:03:24] [43] xtable_1.8-4            lifecycle_1.0.3         DBI_1.1.3               magrittr_2.0.3          formatR_1.14            units_0.8-1            
-DEBUG [2024-02-07 11:03:24] [49] KernSmooth_2.23-20      cli_3.6.1               stringi_1.7.12          cachem_1.0.7            fs_1.6.1                promises_1.2.0.1       
-DEBUG [2024-02-07 11:03:24] [55] remotes_2.4.2           futile.logger_1.4.3     ellipsis_0.3.2          generics_0.1.3          vctrs_0.6.5             s2_1.1.2               
-DEBUG [2024-02-07 11:03:24] [61] lambda.r_1.2.4          tools_4.2.2             glue_1.6.2              purrr_1.0.1             processx_3.8.0          pkgload_1.3.2          
-DEBUG [2024-02-07 11:03:24] [67] fastmap_1.1.1           timechange_0.2.0        sessioninfo_1.2.2       classInt_0.4-9          memoise_2.0.1           profvis_0.3.7          
-DEBUG [2024-02-07 11:03:24] [73] usethis_2.1.6          
-INFO [2024-02-07 11:03:25] 
+INFO [2024-02-07 11:41:00] Running prepare_monitoring_data.R version 1.0.0
+DEBUG [2024-02-07 11:41:00] R version 4.2.2 (2022-10-31)
+DEBUG [2024-02-07 11:41:00] Platform: x86_64-apple-darwin17.0 (64-bit)
+DEBUG [2024-02-07 11:41:00] Running under: macOS Ventura 13.6.3
+DEBUG [2024-02-07 11:41:00] 
+DEBUG [2024-02-07 11:41:00] Matrix products: default
+DEBUG [2024-02-07 11:41:00] LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+DEBUG [2024-02-07 11:41:00] 
+DEBUG [2024-02-07 11:41:00] locale:
+DEBUG [2024-02-07 11:41:00] [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+DEBUG [2024-02-07 11:41:00] 
+DEBUG [2024-02-07 11:41:00] attached base packages:
+DEBUG [2024-02-07 11:41:00] [1] stats     graphics  grDevices utils     datasets  methods   base     
+DEBUG [2024-02-07 11:41:00] 
+DEBUG [2024-02-07 11:41:00] other attached packages:
+DEBUG [2024-02-07 11:41:00] [1] AirMonitorPlots_0.8.3    ggplot2_3.4.2            AirMonitor_0.3.12        MazamaSpatialUtils_0.8.6 sf_1.0-12                MazamaCoreUtils_0.5.2   
+DEBUG [2024-02-07 11:41:00] 
+DEBUG [2024-02-07 11:41:00] loaded via a namespace (and not attached):
+DEBUG [2024-02-07 11:41:00]  [1] pkgload_1.3.2           shiny_1.7.4             yaml_2.3.7              remotes_2.4.2           sessioninfo_1.2.2       pillar_1.9.0           
+DEBUG [2024-02-07 11:41:00]  [7] glue_1.6.2              digest_0.6.31           promises_1.2.0.1        MazamaTimeSeries_0.2.15 colorspace_2.1-0        htmltools_0.5.5        
+DEBUG [2024-02-07 11:41:00] [13] httpuv_1.6.9            pkgconfig_2.0.3         devtools_2.4.5          geodist_0.0.8           s2_1.1.2                purrr_1.0.1            
+DEBUG [2024-02-07 11:41:00] [19] xtable_1.8-4            scales_1.2.1            processx_3.8.0          later_1.3.0             timechange_0.2.0        tibble_3.2.1           
+DEBUG [2024-02-07 11:41:00] [25] proxy_0.4-27            generics_0.1.3          usethis_2.1.6           ellipsis_0.3.2          cachem_1.0.7            withr_2.5.0            
+DEBUG [2024-02-07 11:41:00] [31] cli_3.6.1               magrittr_2.0.3          crayon_1.5.2            mime_0.12               memoise_2.0.1           evaluate_0.20          
+DEBUG [2024-02-07 11:41:00] [37] ps_1.7.4                fs_1.6.1                fansi_1.0.4             class_7.3-21            pkgbuild_1.4.0          profvis_0.3.7          
+DEBUG [2024-02-07 11:41:00] [43] tools_4.2.2             prettyunits_1.1.1       formatR_1.14            lifecycle_1.0.3         MazamaRollUtils_0.1.3   stringr_1.5.0          
+DEBUG [2024-02-07 11:41:00] [49] munsell_0.5.0           lambda.r_1.2.4          callr_3.7.3             compiler_4.2.2          e1071_1.7-13            rlang_1.1.0            
+DEBUG [2024-02-07 11:41:00] [55] classInt_0.4-9          futile.logger_1.4.3     units_0.8-1             grid_4.2.2              rstudioapi_0.14         htmlwidgets_1.6.2      
+DEBUG [2024-02-07 11:41:00] [61] miniUI_0.1.1.1          rmarkdown_2.21          wk_0.7.2                gtable_0.3.3            DBI_1.1.3               curl_5.2.0             
+DEBUG [2024-02-07 11:41:00] [67] R6_2.5.1                lubridate_1.9.2         knitr_1.42              dplyr_1.1.1             fastmap_1.1.1           utf8_1.2.3             
+DEBUG [2024-02-07 11:41:00] [73] rprojroot_2.0.3         futile.options_1.0.1    KernSmooth_2.23-20      desc_1.4.2              stringi_1.7.12          Rcpp_1.0.10            
+DEBUG [2024-02-07 11:41:00] [79] vctrs_0.6.5             tidyselect_1.2.0        xfun_0.38               urlchecker_1.0.1       
+INFO [2024-02-07 11:41:00] 
 ===== 2014 =====
-INFO [2024-02-07 11:03:25] Processing AirNow 2014 data...
-INFO [2024-02-07 11:03:27] Saving ./data/airnow_2014.rda
-INFO [2024-02-07 11:03:27] Processing AIRSIS 2014 data...
-WARN [2024-02-07 11:03:28] No AIRSIS data found in 2014. Any empty monitor object will be saved.
-INFO [2024-02-07 11:03:28] Saving ./data/airsis_2014.rda
-INFO [2024-02-07 11:03:28] Processing WRCC 2014 data...
-INFO [2024-02-07 11:03:29] Saving ./data/wrcc_2014.rda
-INFO [2024-02-07 11:03:29] 
+INFO [2024-02-07 11:41:00] Processing AirNow 2014 data...
+INFO [2024-02-07 11:41:04] Saving ./data/airnow_2014.rda
+INFO [2024-02-07 11:41:04] Processing AIRSIS 2014 data...
+WARN [2024-02-07 11:41:05] No AIRSIS data found in 2014. Any empty monitor object will be saved.
+INFO [2024-02-07 11:41:05] Saving ./data/airsis_2014.rda
+INFO [2024-02-07 11:41:05] Processing WRCC 2014 data...
+INFO [2024-02-07 11:41:06] Saving ./data/wrcc_2014.rda
+INFO [2024-02-07 11:41:06] 
 ===== 2015 =====
-INFO [2024-02-07 11:03:29] Processing AirNow 2015 data...
-INFO [2024-02-07 11:03:34] Saving ./data/airnow_2015.rda
-INFO [2024-02-07 11:03:34] Processing AIRSIS 2015 data...
-WARN [2024-02-07 11:03:35] No AIRSIS data found in 2015. Any empty monitor object will be saved.
-INFO [2024-02-07 11:03:35] Saving ./data/airsis_2015.rda
-INFO [2024-02-07 11:03:35] Processing WRCC 2015 data...
-INFO [2024-02-07 11:03:36] Saving ./data/wrcc_2015.rda
-INFO [2024-02-07 11:03:36] 
+INFO [2024-02-07 11:41:06] Processing AirNow 2015 data...
+INFO [2024-02-07 11:41:08] Saving ./data/airnow_2015.rda
+INFO [2024-02-07 11:41:08] Processing AIRSIS 2015 data...
+WARN [2024-02-07 11:41:09] No AIRSIS data found in 2015. Any empty monitor object will be saved.
+INFO [2024-02-07 11:41:09] Saving ./data/airsis_2015.rda
+INFO [2024-02-07 11:41:09] Processing WRCC 2015 data...
+INFO [2024-02-07 11:41:10] Saving ./data/wrcc_2015.rda
+INFO [2024-02-07 11:41:10] 
 ===== 2016 =====
-INFO [2024-02-07 11:03:36] Processing AirNow 2016 data...
-INFO [2024-02-07 11:03:39] Saving ./data/airnow_2016.rda
-INFO [2024-02-07 11:03:39] Processing AIRSIS 2016 data...
-WARN [2024-02-07 11:03:40] No AIRSIS data found in 2016. Any empty monitor object will be saved.
-INFO [2024-02-07 11:03:40] Saving ./data/airsis_2016.rda
-INFO [2024-02-07 11:03:40] Processing WRCC 2016 data...
-WARN [2024-02-07 11:03:41] No WRCC data found in 2016. Any empty monitor object will be saved.
-INFO [2024-02-07 11:03:41] Saving ./data/wrcc_2016.rda
-INFO [2024-02-07 11:03:41] 
+INFO [2024-02-07 11:41:10] Processing AirNow 2016 data...
+INFO [2024-02-07 11:41:13] Saving ./data/airnow_2016.rda
+INFO [2024-02-07 11:41:13] Processing AIRSIS 2016 data...
+WARN [2024-02-07 11:41:14] No AIRSIS data found in 2016. Any empty monitor object will be saved.
+INFO [2024-02-07 11:41:14] Saving ./data/airsis_2016.rda
+INFO [2024-02-07 11:41:14] Processing WRCC 2016 data...
+WARN [2024-02-07 11:41:15] No WRCC data found in 2016. Any empty monitor object will be saved.
+INFO [2024-02-07 11:41:15] Saving ./data/wrcc_2016.rda
+INFO [2024-02-07 11:41:15] 
 ===== 2017 =====
-INFO [2024-02-07 11:03:41] Processing AirNow 2017 data...
-INFO [2024-02-07 11:03:43] Saving ./data/airnow_2017.rda
-INFO [2024-02-07 11:03:43] Processing AIRSIS 2017 data...
-WARN [2024-02-07 11:03:44] No AIRSIS data found in 2017. Any empty monitor object will be saved.
-INFO [2024-02-07 11:03:44] Saving ./data/airsis_2017.rda
-INFO [2024-02-07 11:03:44] Processing WRCC 2017 data...
-INFO [2024-02-07 11:03:45] Saving ./data/wrcc_2017.rda
-INFO [2024-02-07 11:03:45] 
+INFO [2024-02-07 11:41:15] Processing AirNow 2017 data...
+INFO [2024-02-07 11:41:21] Saving ./data/airnow_2017.rda
+INFO [2024-02-07 11:41:21] Processing AIRSIS 2017 data...
+WARN [2024-02-07 11:41:21] No AIRSIS data found in 2017. Any empty monitor object will be saved.
+INFO [2024-02-07 11:41:21] Saving ./data/airsis_2017.rda
+INFO [2024-02-07 11:41:21] Processing WRCC 2017 data...
+INFO [2024-02-07 11:41:22] Saving ./data/wrcc_2017.rda
+INFO [2024-02-07 11:41:22] 
 ===== 2018 =====
-INFO [2024-02-07 11:03:45] Processing AirNow 2018 data...
-INFO [2024-02-07 11:03:49] Saving ./data/airnow_2018.rda
-INFO [2024-02-07 11:03:49] Processing AIRSIS 2018 data...
-INFO [2024-02-07 11:03:50] Saving ./data/airsis_2018.rda
-INFO [2024-02-07 11:03:50] Processing WRCC 2018 data...
-INFO [2024-02-07 11:03:51] Saving ./data/wrcc_2018.rda
-INFO [2024-02-07 11:03:51] 
+INFO [2024-02-07 11:41:22] Processing AirNow 2018 data...
+INFO [2024-02-07 11:41:32] Saving ./data/airnow_2018.rda
+INFO [2024-02-07 11:41:32] Processing AIRSIS 2018 data...
+INFO [2024-02-07 11:41:33] Saving ./data/airsis_2018.rda
+INFO [2024-02-07 11:41:33] Processing WRCC 2018 data...
+INFO [2024-02-07 11:41:34] Saving ./data/wrcc_2018.rda
+INFO [2024-02-07 11:41:34] 
 ===== 2019 =====
-INFO [2024-02-07 11:03:51] Processing AirNow 2019 data...
-INFO [2024-02-07 11:03:54] Saving ./data/airnow_2019.rda
-INFO [2024-02-07 11:03:54] Processing AIRSIS 2019 data...
-WARN [2024-02-07 11:03:55] No AIRSIS data found in 2019. Any empty monitor object will be saved.
-INFO [2024-02-07 11:03:55] Saving ./data/airsis_2019.rda
-INFO [2024-02-07 11:03:55] Processing WRCC 2019 data...
-INFO [2024-02-07 11:03:56] Saving ./data/wrcc_2019.rda
-INFO [2024-02-07 11:03:56] 
+INFO [2024-02-07 11:41:34] Processing AirNow 2019 data...
+INFO [2024-02-07 11:41:37] Saving ./data/airnow_2019.rda
+INFO [2024-02-07 11:41:37] Processing AIRSIS 2019 data...
+WARN [2024-02-07 11:41:38] No AIRSIS data found in 2019. Any empty monitor object will be saved.
+INFO [2024-02-07 11:41:38] Saving ./data/airsis_2019.rda
+INFO [2024-02-07 11:41:38] Processing WRCC 2019 data...
+INFO [2024-02-07 11:41:39] Saving ./data/wrcc_2019.rda
+INFO [2024-02-07 11:41:39] 
 ===== 2020 =====
-INFO [2024-02-07 11:03:56] Processing AirNow 2020 data...
-INFO [2024-02-07 11:04:04] Saving ./data/airnow_2020.rda
-INFO [2024-02-07 11:04:04] Processing AIRSIS 2020 data...
-WARN [2024-02-07 11:04:05] No AIRSIS data found in 2020. Any empty monitor object will be saved.
-INFO [2024-02-07 11:04:05] Saving ./data/airsis_2020.rda
-INFO [2024-02-07 11:04:05] Processing WRCC 2020 data...
-WARN [2024-02-07 11:04:06] No WRCC data found in 2020. Any empty monitor object will be saved.
-INFO [2024-02-07 11:04:06] Saving ./data/wrcc_2020.rda
-INFO [2024-02-07 11:04:06] 
+INFO [2024-02-07 11:41:39] Processing AirNow 2020 data...
+INFO [2024-02-07 11:41:43] Saving ./data/airnow_2020.rda
+INFO [2024-02-07 11:41:43] Processing AIRSIS 2020 data...
+WARN [2024-02-07 11:41:44] No AIRSIS data found in 2020. Any empty monitor object will be saved.
+INFO [2024-02-07 11:41:44] Saving ./data/airsis_2020.rda
+INFO [2024-02-07 11:41:44] Processing WRCC 2020 data...
+WARN [2024-02-07 11:41:45] No WRCC data found in 2020. Any empty monitor object will be saved.
+INFO [2024-02-07 11:41:45] Saving ./data/wrcc_2020.rda
+INFO [2024-02-07 11:41:45] 
 ===== 2021 =====
-INFO [2024-02-07 11:04:06] Processing AirNow 2021 data...
-INFO [2024-02-07 11:04:09] Saving ./data/airnow_2021.rda
-INFO [2024-02-07 11:04:09] Processing AIRSIS 2021 data...
-WARN [2024-02-07 11:04:10] No AIRSIS data found in 2021. Any empty monitor object will be saved.
-INFO [2024-02-07 11:04:10] Saving ./data/airsis_2021.rda
-INFO [2024-02-07 11:04:10] Processing WRCC 2021 data...
-INFO [2024-02-07 11:04:11] Saving ./data/wrcc_2021.rda
-INFO [2024-02-07 11:04:11] 
+INFO [2024-02-07 11:41:45] Processing AirNow 2021 data...
+INFO [2024-02-07 11:41:51] Saving ./data/airnow_2021.rda
+INFO [2024-02-07 11:41:51] Processing AIRSIS 2021 data...
+WARN [2024-02-07 11:41:52] No AIRSIS data found in 2021. Any empty monitor object will be saved.
+INFO [2024-02-07 11:41:52] Saving ./data/airsis_2021.rda
+INFO [2024-02-07 11:41:52] Processing WRCC 2021 data...
+INFO [2024-02-07 11:41:53] Saving ./data/wrcc_2021.rda
+INFO [2024-02-07 11:41:53] 
 ===== 2022 =====
-INFO [2024-02-07 11:04:11] Processing AirNow 2022 data...
-INFO [2024-02-07 11:04:14] Saving ./data/airnow_2022.rda
-INFO [2024-02-07 11:04:14] Processing AIRSIS 2022 data...
-WARN [2024-02-07 11:04:15] No AIRSIS data found in 2022. Any empty monitor object will be saved.
-INFO [2024-02-07 11:04:15] Saving ./data/airsis_2022.rda
-INFO [2024-02-07 11:04:15] Processing WRCC 2022 data...
-INFO [2024-02-07 11:04:16] Saving ./data/wrcc_2022.rda
-INFO [2024-02-07 11:04:16] 
+INFO [2024-02-07 11:41:53] Processing AirNow 2022 data...
+INFO [2024-02-07 11:42:00] Saving ./data/airnow_2022.rda
+INFO [2024-02-07 11:42:00] Processing AIRSIS 2022 data...
+WARN [2024-02-07 11:42:00] No AIRSIS data found in 2022. Any empty monitor object will be saved.
+INFO [2024-02-07 11:42:00] Saving ./data/airsis_2022.rda
+INFO [2024-02-07 11:42:00] Processing WRCC 2022 data...
+INFO [2024-02-07 11:42:01] Saving ./data/wrcc_2022.rda
+INFO [2024-02-07 11:42:01] 
 ===== 2023 =====
-INFO [2024-02-07 11:04:16] Processing AirNow 2023 data...
-INFO [2024-02-07 11:04:20] Saving ./data/airnow_2023.rda
-INFO [2024-02-07 11:04:20] Processing AIRSIS 2023 data...
-WARN [2024-02-07 11:04:21] No AIRSIS data found in 2023. Any empty monitor object will be saved.
-INFO [2024-02-07 11:04:21] Saving ./data/airsis_2023.rda
-INFO [2024-02-07 11:04:21] Processing WRCC 2023 data...
-WARN [2024-02-07 11:04:22] No WRCC data found in 2023. Any empty monitor object will be saved.
-INFO [2024-02-07 11:04:22] Saving ./data/wrcc_2023.rda
+INFO [2024-02-07 11:42:01] Processing AirNow 2023 data...
+INFO [2024-02-07 11:42:10] Saving ./data/airnow_2023.rda
+INFO [2024-02-07 11:42:10] Processing AIRSIS 2023 data...
+WARN [2024-02-07 11:42:11] No AIRSIS data found in 2023. Any empty monitor object will be saved.
+INFO [2024-02-07 11:42:11] Saving ./data/airsis_2023.rda
+INFO [2024-02-07 11:42:11] Processing WRCC 2023 data...
+WARN [2024-02-07 11:42:12] No WRCC data found in 2023. Any empty monitor object will be saved.
+INFO [2024-02-07 11:42:12] Saving ./data/wrcc_2023.rda
