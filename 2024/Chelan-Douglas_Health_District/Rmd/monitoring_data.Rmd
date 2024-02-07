@@ -1,5 +1,5 @@
 ---
-title: "Chelan-Douglas-Okanogan Monitoring data"
+title: "Chelan-Douglas-Okanogan Monitoring Data"
 output:
   html_document: 
     css: report_styles.css
@@ -11,7 +11,7 @@ Processed on `r paste(lubridate::now(),format(lubridate::now(), "%Z"))`.
 
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, error = FALSE)
+knitr::opts_chunk$set(echo = FALSE, error = FALSE)
 
 suppressPackageStartupMessages({
   library(MazamaSpatialUtils)
@@ -19,40 +19,153 @@ suppressPackageStartupMessages({
   library(AirMonitorPlots)
 })
 
-year = 2014
+# Year will be passed in a as a paremter
+###year = 2014
+
+startdate <- sprintf("%d0701", year)
+enddate <- sprintf("%d1101", year)
+timezone <- "America/Los_Angeles"
 ```
 
-# `r year`
-
 ```{r load_data}
+# NOTE:  These paths are relative to the Rmd/ directory
 airnow <- get(load(sprintf("../data/airnow_%d.rda", year)))
 airsis <- get(load(sprintf("../data/airsis_%d.rda", year)))
 wrcc <- get(load(sprintf("../data/wrcc_%d.rda", year)))
 ```
 
-## Available AirNow data
+# AirNow monitors in `r year`
 
-```{r airnow_map, echo = TRUE, error = TRUE}
-monitor_leaflet(airnow)
+The Chelan-Douglas-Okanogan area had `r nrow(airnow$meta)` AirNow
+monitor-deployments during the `r year` fire season. Click on a dot in the map
+below to learn more about each deployment.
+
+```{r airnow_map}
+airnow %>%
+  monitor_leaflet()
+```
+
+## AirNow hourly data
+
+It is ueful to plot hourly measurements and do a simple "gut check" visual QC
+before we start combining them into daily averages.
+
+```{r airnow_timeseriesPlot}
+airnow %>%
+  monitor_timeseriesPlot(
+    addAQI = TRUE
+  )
 ```
 
 ## AirNow daily averages
 
-```{r airnow_dailyBarplot}
-startdate <- sprintf("%d0701", year)
-enddate <- sprintf("%d1101", year)
-ggplot_pm25Timeseries(
-  airnow,
-  startdate = startdate,
-  enddate = enddate
-) +
+```{r airnow_dailyBarplot, fig.height = 7}
+gg <-
+  ggplot_pm25Timeseries(
+    airnow,
+    startdate = startdate,
+    enddate = enddate
+  ) +
   ggtitle("Daily average PM2.5") +
-  stat_dailyAQCategory(timezone = "America/Los_Angeles") + 
+  stat_dailyAQCategory(timezone = timezone) + 
   facet_grid(rows = vars(locationName))
+
+suppressWarnings({ print(gg) })
 ```
 
+# AIRSIS monitors in `r year`
 
-## TODO
+There were `r nrow(airsis$meta)` AIRSIS
+monitor-deployments during the `r year` fire season.
 
-The rest of the report goes here.
+```{r airsis_map, eval = nrow(airsis$meta) > 0}
+airsis %>%
+  monitor_leaflet()  
+```
+
+ ```{r eval = nrow(airsis$meta) == 0} 
+ knitr::asis_output("## No data avaiable") 
+ ``` 
+
+## AIRSIS hourly data
+
+```{r airsis_timeseriesPlot, eval = nrow(airsis$meta) > 0}
+airsis %>%
+  monitor_timeseriesPlot(
+    addAQI = TRUE
+  )
+```
+
+ ```{r eval = nrow(airsis$meta) == 0} 
+ knitr::asis_output("## No data avaiable") 
+ ``` 
+
+## AIRSIS daily averages
+
+```{r airsis_dailyBarplot, fig.height = 7, eval = nrow(airsis$meta) > 0}
+gg <-
+  ggplot_pm25Timeseries(
+    airsis,
+    startdate = startdate,
+    enddate = enddate
+  ) +
+  ggtitle("Daily average PM2.5") +
+  stat_dailyAQCategory(timezone = timezone) + 
+  facet_grid(rows = vars(locationName))
+
+suppressWarnings({ print(gg) })
+```
+
+ ```{r eval = nrow(airsis$meta) == 0} 
+ knitr::asis_output("## No data avaiable") 
+ ``` 
+
+# WRCC monitors in `r year`
+
+There were `r nrow(wrcc$meta)` WRCC
+monitor-deployments during the `r year` fire season.
+
+```{r wrcc_map, eval = nrow(wrcc$meta) > 0}
+wrcc %>%
+  monitor_leaflet()
+```
+
+ ```{r eval = nrow(wrcc$meta) == 0} 
+ knitr::asis_output("## No data avaiable") 
+ ``` 
+
+## WRCC hourly data
+
+```{r wrcc_timeseriesPlot, eval = nrow(wrcc$meta) > 0}
+wrcc %>%
+  monitor_timeseriesPlot(
+    addAQI = TRUE
+  )
+```
+
+ ```{r eval = nrow(wrcc$meta) == 0} 
+ knitr::asis_output("## No data avaiable") 
+ ``` 
+
+## WRCC daily averages
+
+```{r wrcc_dailyBarplot, fig.height = 7, eval = nrow(wrcc$meta) > 0}
+gg <-
+  ggplot_pm25Timeseries(
+    wrcc,
+    startdate = startdate,
+    enddate = enddate
+  ) +
+  ggtitle("Daily average PM2.5") +
+  stat_dailyAQCategory(timezone = timezone) + 
+  facet_grid(rows = vars(locationName))
+
+suppressWarnings({ print(gg) })
+```
+
+ ```{r eval = nrow(wrcc$meta) == 0} 
+ knitr::asis_output("## No data avaiable") 
+ ``` 
+
+
 
