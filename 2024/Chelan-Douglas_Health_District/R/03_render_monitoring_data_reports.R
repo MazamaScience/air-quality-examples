@@ -1,4 +1,4 @@
-# Render the monitoring_data.Rmd report for successive years
+# Step 3) Render the monitoring_data.Rmd report for successive years
 #
 #
 # NOTE:  Data archives begin in 2014
@@ -10,6 +10,11 @@ if ( !stringr::str_detect(getwd(), "Chelan-Douglas_Health_District$") ) {
   stop("WD_ERROR:  Please set the working directory to 'Chelan-Douglas_Health_District/'")
 }
 
+if ( packageVersion("AirMonitor") < "0.4.0" ) {
+  stop("VERSION_ERROR:  Please upgrade to AirMonitor 0.4.0 or later.")
+}
+
+# ----- Render annual monitoring_data reports ----------------------------------
 
 for ( year in 2014:2023 ) {
   

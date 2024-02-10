@@ -1,6 +1,6 @@
-# Prepare monitoring data for north central Washington state
+# Step 2) Prepare monitoring data for north central Washington state
 #
-# After running explore_monitoring_data.R we know:
+# After running 01_explore_monitoring_data.R we know:
 # - data only exist starting in 2014
 # - we need to ensure that countyName is populated before filtering on that field
 
@@ -16,6 +16,10 @@ if ( !stringr::str_detect(getwd(), "Chelan-Douglas_Health_District$") ) {
 library(MazamaCoreUtils)
 library(MazamaSpatialUtils)
 library(AirMonitor)
+
+if ( packageVersion("AirMonitor") < "0.4.0" ) {
+  stop("VERSION_ERROR:  Please upgrade to AirMonitor 0.4.0 or later.")
+}
 
 # Load dataset used to assign countyName
 setSpatialDataDir("~/Data/Spatial")
@@ -37,17 +41,17 @@ logger.debug(capture.output(sessionInfo()))
 # we return it without processing so that this function does not error out in
 # the middle of a recipe.
 
-monitor_addCountyName <- function(mon, stateCodes = ("WA")) {
-  if ( !monitor_isEmpty(mon) ) {
-    mon$meta$countyName <- 
+monitor_addCountyName <- function(monitor, stateCodes = ("WA")) {
+  if ( !monitor_isEmpty(monitor) ) {
+    monitor$meta$countyName <- 
       MazamaSpatialUtils::getUSCounty(
-        mon$meta$longitude, 
-        mon$meta$latitude, 
+        monitor$meta$longitude, 
+        monitor$meta$latitude, 
         stateCodes = stateCodes, 
         useBuffering = TRUE
       )  
   }
-  return(mon)
+  return(monitor)
 }
 
 # ----- Process data -----------------------------------------------------------

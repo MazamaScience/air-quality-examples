@@ -16,6 +16,10 @@ if ( !stringr::str_detect(getwd(), "Chelan-Douglas_Health_District$") ) {
 
 library(AirMonitor)
 
+if ( packageVersion("AirMonitor") < "0.4.0" ) {
+  stop("VERSION_ERROR:  Please upgrade to AirMonitor 0.4.0 or later.")
+}
+
 # ----- Combine data -----------------------------------------------------------
 
 airnow <- get(load("./data/airnow_2014.rda"))

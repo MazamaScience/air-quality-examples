@@ -32,140 +32,73 @@ timezone <- "America/Los_Angeles"
 airnow <- get(load(sprintf("../data/airnow_%d.rda", year)))
 airsis <- get(load(sprintf("../data/airsis_%d.rda", year)))
 wrcc <- get(load(sprintf("../data/wrcc_%d.rda", year)))
+
+# NOTE:  We put airnow last so it's meta and data will be used  if an ID appears more than once
+monitor <-
+  monitor_combine(
+    wrcc, airsis, airnow,
+    replaceMeta = TRUE,
+    overlapStrategy = "replace all"
+  ) %>%
+  monitor_dropEmpty() %>%
+  monitor_trimDate()
+
 ```
 
-# AirNow monitors in `r year`
+# Air Quality Monitors in `r year`
 
-The Chelan-Douglas-Okanogan area had `r nrow(airnow$meta)` AirNow
-monitor-deployments during the `r year` fire season. Click on a dot in the map
-below to learn more about each deployment.
+The Chelan-Douglas-Okanogan area had `r nrow(monitor$meta)` monitor-deployments 
+during the `r year` July - October wildfire season. This includes both regulatory 
+monitors that are part of the EPA AQS system as well as "temporary" monitors 
+deployed by state and federal agencies during wildfires.
+
+Click on a dot in the map below to learn more about each monitor-deployment.
 
 ```{r airnow_map}
-airnow %>%
-  monitor_leaflet()
+monitor %>%
+  monitor_leaflet(
+    extraVars = c(
+      "deploymentType",
+      "dataIngestSource",
+      "AQSID"
+    )
+  )
 ```
 
-## AirNow hourly data
+## Hourly data
 
 It is ueful to plot hourly measurements and do a simple "gut check" visual QC
 before we start combining them into daily averages.
 
 ```{r airnow_timeseriesPlot}
-airnow %>%
+monitor %>%
   monitor_timeseriesPlot(
     addAQI = TRUE
   )
+
+monitorCount <- nrow(monitor$meta) * 1.5
 ```
 
-## AirNow daily averages
+## Daily averages
 
-```{r airnow_dailyBarplot, fig.height = 7}
+```{r airnow_dailyBarplot, fig.height = monitorCount}
 gg <-
   ggplot_pm25Timeseries(
-    airnow,
+    monitor,
     startdate = startdate,
     enddate = enddate
   ) +
   ggtitle("Daily average PM2.5") +
-  stat_dailyAQCategory(timezone = timezone) + 
+  stat_dailyAQCategory(timezone = timezone) +
   facet_grid(rows = vars(locationName))
 
 suppressWarnings({ print(gg) })
+
 ```
 
-# AIRSIS monitors in `r year`
+-----
 
-There were `r nrow(airsis$meta)` AIRSIS
-monitor-deployments during the `r year` fire season.
 
-```{r airsis_map, eval = nrow(airsis$meta) > 0}
-airsis %>%
-  monitor_leaflet()  
-```
-
- ```{r eval = nrow(airsis$meta) == 0} 
- knitr::asis_output("## No data avaiable") 
- ``` 
-
-## AIRSIS hourly data
-
-```{r airsis_timeseriesPlot, eval = nrow(airsis$meta) > 0}
-airsis %>%
-  monitor_timeseriesPlot(
-    addAQI = TRUE
-  )
-```
-
- ```{r eval = nrow(airsis$meta) == 0} 
- knitr::asis_output("## No data avaiable") 
- ``` 
-
-## AIRSIS daily averages
-
-```{r airsis_dailyBarplot, fig.height = 7, eval = nrow(airsis$meta) > 0}
-gg <-
-  ggplot_pm25Timeseries(
-    airsis,
-    startdate = startdate,
-    enddate = enddate
-  ) +
-  ggtitle("Daily average PM2.5") +
-  stat_dailyAQCategory(timezone = timezone) + 
-  facet_grid(rows = vars(locationName))
-
-suppressWarnings({ print(gg) })
-```
-
- ```{r eval = nrow(airsis$meta) == 0} 
- knitr::asis_output("## No data avaiable") 
- ``` 
-
-# WRCC monitors in `r year`
-
-There were `r nrow(wrcc$meta)` WRCC
-monitor-deployments during the `r year` fire season.
-
-```{r wrcc_map, eval = nrow(wrcc$meta) > 0}
-wrcc %>%
-  monitor_leaflet()
-```
-
- ```{r eval = nrow(wrcc$meta) == 0} 
- knitr::asis_output("## No data avaiable") 
- ``` 
-
-## WRCC hourly data
-
-```{r wrcc_timeseriesPlot, eval = nrow(wrcc$meta) > 0}
-wrcc %>%
-  monitor_timeseriesPlot(
-    addAQI = TRUE
-  )
-```
-
- ```{r eval = nrow(wrcc$meta) == 0} 
- knitr::asis_output("## No data avaiable") 
- ``` 
-
-## WRCC daily averages
-
-```{r wrcc_dailyBarplot, fig.height = 7, eval = nrow(wrcc$meta) > 0}
-gg <-
-  ggplot_pm25Timeseries(
-    wrcc,
-    startdate = startdate,
-    enddate = enddate
-  ) +
-  ggtitle("Daily average PM2.5") +
-  stat_dailyAQCategory(timezone = timezone) + 
-  facet_grid(rows = vars(locationName))
-
-suppressWarnings({ print(gg) })
-```
-
- ```{r eval = nrow(wrcc$meta) == 0} 
- knitr::asis_output("## No data avaiable") 
- ``` 
 
 
 
