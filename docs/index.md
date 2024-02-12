@@ -7,7 +7,7 @@ R packages for working with air quality data with
 a focus on small particulates -- PM2.5.
 
 Source code for generating all reports and this site is available at:
-https://github.com/MazamaScience/air-quality-examples
+<https://github.com/MazamaScience/air-quality-examples>
 
 ## 2024
 
