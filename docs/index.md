@@ -3,8 +3,7 @@
 This site provides links to reports and data files generated with the
 [AirMonitor](https://mazamascience.github.io/AirMonitor) and 
 [AirSensor2](https://mazamascience.github.io/AirSensor2) 
-R packages for working with air quality data with
-a focus on small particulates -- PM2.5.
+R packages for working with air quality data.
 
 Source code for generating all reports and this site is available at:
 [https://github.com/MazamaScience/air-quality-examples](https://github.com/MazamaScience/air-quality-examples)
