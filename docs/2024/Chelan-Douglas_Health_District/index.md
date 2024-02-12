@@ -34,5 +34,11 @@ averages for each site.
 _Note that this report includes data from temporary monitors that have incomplete
 data._
 
+----
+
+Source code for generating these reports is available at:
+https://github.com/MazamaScience/air-quality-examples/tree/main/2024/Chelan-Douglas_Health_District
+
+
 
 
