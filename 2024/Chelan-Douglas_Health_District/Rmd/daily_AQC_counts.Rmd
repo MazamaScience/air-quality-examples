@@ -18,10 +18,14 @@ suppressPackageStartupMessages({
 
 ```
 
-# AQI Category-Days
+_Disclaimer: Data presented here come from a variety of sources and do not 
+represent official EPA measurements. Please visit
+[AirNow](https://www.airnow.gov) for official measurements._
 
-The following tables summarize the number of days spent in each AQI category
-during the July-October smoke season in each year. Tables include both
+----
+
+The following tables summarize the number of days each site spent in each AQI
+category during the July-October smoke season in each year. Tables include both
 permanent and temporary monitors, many of which were deployed only briefly. 
 The number of days with `Missing` values over each four month period is found in 
 the rightmost column. 
@@ -29,14 +33,16 @@ the rightmost column.
 
 ```{r year_loop, results = "asis"}
 
-# Define a function to convert numeric values into AQC categories
-pm25_to_AQC <- function(x) {
-  aqc <-
-    cut(x, breaks = US_AQI$breaks_PM2.5, labels = US_AQI$names_eng)
-  return(aqc)
-}
+# # Define a function to convert numeric values into AQC categories
+# pm25_to_AQC <- function(x) {
+#   aqc <-
+#     cut(x, breaks = US_AQI$breaks_PM2.5, labels = US_AQI$names_eng)
+#   return(aqc)
+# }
+# 
+# baseUrl <- "http://smoke.mazamascience.com/Liz_Walker/CDHD_report/monitoring_data"
 
-baseUrl <- "http://smoke.mazamascience.com/Liz_Walker/CDHD_report/monitoring_data"
+baseUrl <- "."
 
 for ( year in 2014:2023 ) {
   
@@ -53,7 +59,7 @@ for ( year in 2014:2023 ) {
   airsis <- get(load(sprintf("../data/airsis_%d.rda", year)))
   wrcc <- get(load(sprintf("../data/wrcc_%d.rda", year)))
   
-  # NOTE:  We put airnow last so it's meta and data will be used  if an ID appears more than once
+  # NOTE:  We put airnow last so it's meta and data will be used if an ID appears more than once
   monitor <-
     monitor_combine(
       wrcc, airsis, airnow,
@@ -61,16 +67,16 @@ for ( year in 2014:2023 ) {
       overlapStrategy = "replace all"
     ) %>%
     monitor_dropEmpty() %>%
-    monitor_trimDate()
+    monitor_trimDate() %>%
+    monitor_arrange(locationName)
   
-  cat("\n\n# `", year, "`\n")
-  cat("\nIn the `", year, "` smoke season, `", nrow(monitor$meta), "` monitors were deployed.\n")
-  cat("See the [data report](", dataReportUrl, ").\n")
+  cat("\n\n# ", year, "\n")
+  cat("\nIn the ", year, " smoke season, ", nrow(monitor$meta), " monitors were deployed.\n")
+  cat("Please see the [data report](", dataReportUrl, ") to review input data.\n")
 
   # ----- Create table ---------------------------------------------------------
   
-  # Use cut() to convert PM2.5 measurements into Air Quality Category (AQC)
-  dailyAQC <- 
+  dailyAQCTable <-
     monitor %>%
     monitor_dailyStatistic(
       FUN = mean,
@@ -79,30 +85,11 @@ for ( year in 2014:2023 ) {
       dayBoundary = c("LST")
     ) %>%
     monitor_dropEmpty() %>%
-    monitor_mutate(
-      FUN = pm25_to_AQC 
-    )
-  
-  # Use base R (not dplyr) to assemble a table
-  dayCounts <- data.frame(row.names = c(US_AQI$names_eng, "Missing"))
-  for ( i in 2:ncol(dailyAQC$data) ) {
-    # Site name
-    siteName <- dailyAQC$meta$locationName[i-1]
-    # AQC day counts
-    aqcDayCounts <- 
-      dplyr::pull(dailyAQC$data, i) %>%
-      factor(levels = US_AQI$names_eng) %>%
-      table(useNA = "always") %>%
-      as.numeric()
-    # Build up the table with one row per site
-    dayCounts[[siteName]] = aqcDayCounts
-  }
-  
-  categoryDaysBySite <- t(dayCounts)
+    monitor_toAQCTable(NAAQS = "PM2.5")
   
   # ----- Print table ----------------------------------------------------------
   
-  print(knitr::kable(categoryDaysBySite))
+  print(knitr::kable(dailyAQCTable))
 }
 ```
 

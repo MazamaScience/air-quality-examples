@@ -9,7 +9,6 @@ Processed on `r paste(lubridate::now(),format(lubridate::now(), "%Z"))`.
 
 ----
 
-
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE, error = FALSE)
 
@@ -47,10 +46,20 @@ monitor <-
 
 # Air Quality Monitors in `r year`
 
+_Disclaimer: Data presented here come from a variety of sources and do not 
+represent official EPA measurements. Please visit
+[AirNow](https://www.airnow.gov) for official measurements._
+
+----
+
 The Chelan-Douglas-Okanogan area had `r nrow(monitor$meta)` monitor-deployments 
-during the `r year` July - October wildfire season. This includes both regulatory 
+during the `r year` July - October wildfire season. These includes both regulatory 
 monitors that are part of the EPA AQS system as well as "temporary" monitors 
 deployed by state and federal agencies during wildfires.
+
+This page provides an overview of monitoring data available in the USFS AirFire 
+archives. Additional monitoring data may be available from state and tribal
+agencies.
 
 Click on a dot in the map below to learn more about each monitor-deployment.
 
@@ -67,8 +76,10 @@ monitor %>%
 
 ## Hourly data
 
-It is ueful to plot hourly measurements and do a simple "gut check" visual QC
-before we start combining them into daily averages.
+By plotting hourly measurements for all monitors at once, we can do a quick
+visual QC of available data. Clusters of points 
+around a very high value may signal problems with a monitor and would require 
+additional investigation to identify the sensor and assess the quality of that data.
 
 ```{r airnow_timeseriesPlot}
 monitor %>%
@@ -80,6 +91,10 @@ monitorCount <- nrow(monitor$meta) * 1.5
 ```
 
 ## Daily averages
+
+Here, we plot daily averages for all monitors with enough data for this 
+calculation. Some temporary monitors may not have enough valid data points per
+day and will be omitted from the plots below.
 
 ```{r airnow_dailyBarplot, fig.height = monitorCount}
 gg <-

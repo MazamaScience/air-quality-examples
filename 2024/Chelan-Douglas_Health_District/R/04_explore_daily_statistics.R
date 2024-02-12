@@ -14,11 +14,11 @@ if ( !stringr::str_detect(getwd(), "Chelan-Douglas_Health_District$") ) {
   stop("WD_ERROR:  Please set the working directory to 'Chelan-Douglas_Health_District/'")
 }
 
-library(AirMonitor)
-
 if ( packageVersion("AirMonitor") < "0.4.0" ) {
   stop("VERSION_ERROR:  Please upgrade to AirMonitor 0.4.0 or later.")
 }
+
+library(AirMonitor)
 
 # ----- Combine data -----------------------------------------------------------
 
@@ -52,16 +52,7 @@ dplyr::glimpse(unhealthy$data)
 
 # ----- Daily average ----------------------------------------------------------
 
-# Define a function to convert numeric values into AQC categories (factors)
-pm25_to_AQC <- function(x) {
-  aqc <-
-    cut(x, breaks = US_AQI$breaks_PM2.5, labels = US_AQI$names_eng)
-  return(aqc)
-}
-
-# Use cut() to convert PM2.5 measurements into Air Quality Category (AQC)
-
-dailyAQC <- 
+dailyAQCTable <-
   monitor %>%
   monitor_dailyStatistic(
     FUN = mean,
@@ -70,31 +61,8 @@ dailyAQC <-
     dayBoundary = c("LST")
   ) %>%
   monitor_dropEmpty() %>%
-  monitor_mutate(
-    FUN = pm25_to_AQC 
-  )
+  monitor_toAQCTable(NAAQS = "PM2.5")
 
-dayCounts <- data.frame(row.names = c(US_AQI$names_eng, "Missing"))
-# Create a table with needed information
-for ( i in 2:ncol(dailyAQC$data) ) {
-  # Site name
-  siteName <- dailyAQC$meta$locationName[i-1]
-  # AQC day counts
-  aqcDayCounts <- 
-    dplyr::pull(dailyAQC$data, i) %>%
-    factor(levels = US_AQI$names_eng) %>%
-    table(useNA = "always") %>%
-    as.numeric()
-  # Build up the table with one row per site
-  # if ( i == 2 ) {
-  #   dayCounts <- data.frame(siteName = aqcDayCounts)
-  # } else {
-    dayCounts[[siteName]] = aqcDayCounts
-  # }
-}
-
-finalTable <- t(dayCounts)
-
-print(finalTable)
+print(dailyAQCTable)
 
 
