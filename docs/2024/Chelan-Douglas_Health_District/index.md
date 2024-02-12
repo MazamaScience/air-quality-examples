@@ -12,7 +12,7 @@ The Chelan-Douglas Health District (CDHP) in north central Washington state is
 doing a review of the impacts of smoke during fire seasons over the past decade.
 The area of interest covers Chelan, Douglas and Okanogan counties.
 
-## [Monitoring Data Daily AQC Counts](./daily_AQC_counts.html)
+## Monitoring Data Daily AQC Counts [report](./daily_AQC_counts.html)
 
 The US EPA defines the following Air Quality Categories (AQC):
 
