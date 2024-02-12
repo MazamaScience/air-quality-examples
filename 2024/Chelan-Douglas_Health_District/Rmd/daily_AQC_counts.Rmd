@@ -73,7 +73,7 @@ for ( year in 2014:2023 ) {
   cat("\n\n# ", year, "\n")
   cat("\nIn the ", year, " smoke season, ", nrow(monitor$meta), " monitors were deployed.\n")
   cat("Please see the [data report](", dataReportUrl, ") to review input data.\n")
-
+  
   # ----- Create table ---------------------------------------------------------
   
   dailyAQCTable <-
@@ -89,7 +89,31 @@ for ( year in 2014:2023 ) {
   
   # ----- Print table ----------------------------------------------------------
   
-  print(knitr::kable(dailyAQCTable))
+  print(knitr::kable(
+    dailyAQCTable, 
+    caption = "Air Quality Categories using 2023 NAAQS"
+  ))
+  
+  # ----- Create table ---------------------------------------------------------
+  
+  dailyAQCTable <-
+    monitor %>%
+    monitor_dailyStatistic(
+      FUN = mean,
+      na.rm = TRUE,
+      minHours = 18,
+      dayBoundary = c("LST")
+    ) %>%
+    monitor_dropEmpty() %>%
+    monitor_toAQCTable(NAAQS = "PM2.5_2024")
+  
+  # ----- Print table ----------------------------------------------------------
+  
+  print(knitr::kable(
+    dailyAQCTable, 
+    caption = "Air Quality Categories under 2024 announced NAAQS revision"
+  ))
+  
 }
 ```
 
