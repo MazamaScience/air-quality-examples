@@ -35,11 +35,11 @@ setAPIKey("PurpleAir-read", PurpleAir_API_READ_KEY)
 fileName <- "data/pas.rda"
 
 if ( exists(fileName) ) {
-  
+
   pas <- get(load(fileName))
-  
+
 } else {
-  
+
   pas <-
     pas_createNew(
       countryCodes = "US",
@@ -48,12 +48,26 @@ if ( exists(fileName) ) {
       lookbackDays = 13650, # 10 years
       location_type = 0
     )
-  
+
   save(pas, file = "data/pas.rda")
-  
+
 }
 
-pas %>% pas_leaflet("pm2.5_24hour")
+# Check out available data
+fields <- c("sensor_index", "name", "date_created", "last_seen")
+
+for ( year in 2014:2020 ) {
+
+  message(sprintf("===== %d =====", year))
+  startdate <- year * 1e4 + 701
+  enddate <- year * 1e4 + 1101
+
+  pas %>%
+    pas_filterDate(startdate, enddate, timezone = "America/Los_Angeles") %>%
+    dplyr::select(dplyr::all_of(fields)) %>%
+    print()
+
+}
 
 # ----- Create a 'pat' object --------------------------------------------------
 
