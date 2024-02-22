@@ -33,9 +33,9 @@ fileName <- "data/pas.rda"
 if ( file.exists(fileName) ) {
   
   pas <- get(load(fileName))
-  
+
 } else {
-  
+
   pas <-
     pas_createNew(
       countryCodes = "US",
@@ -44,22 +44,26 @@ if ( file.exists(fileName) ) {
       lookbackDays = 13650, # 10 years
       location_type = 0
     )
-  
+
   save(pas, file = "data/pas.rda")
-  
+
 }
 
-fields <- c("sensor_index", "locationName", "date_created", "last_seen")
-time_range <-
+# Check out available data
+fields <- c("sensor_index", "name", "date_created", "last_seen")
+
+for ( year in 2014:2020 ) {
+
+  message(sprintf("===== %d =====", year))
+  startdate <- year * 1e4 + 701
+  enddate <- year * 1e4 + 1101
+
   pas %>%
-  dplyr::select(dplyr::all_of(fields))
+    pas_filterDate(startdate, enddate, timezone = "America/Los_Angeles") %>%
+    dplyr::select(dplyr::all_of(fields)) %>%
+    print()
 
-readr::write_csv(time_range, file = "CDHD_sensors_time_range.csv")
-
-
-
-# REDO EVERYTHING AFTER THIS
-
+}
 
 # ----- Create a 'pat' object --------------------------------------------------
 
