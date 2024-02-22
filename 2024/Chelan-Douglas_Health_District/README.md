@@ -14,7 +14,7 @@ The Chelan-Douglas Health District (CDHP) in north central Washington state is
 doing a review of the impacts of smoke during fire seasons over the past decade.
 The area of interest covers Chelan, Douglas and Okanogan counties.
 
-The R scripts in this directory assembles available data and generates reports
+The R scripts in this directory assemble available data and generates reports
 and data files that may be useful to the CDHP. 
 The [AirMonitor](https://github.com/MazamaScience/AirMonitor) 
 package is used to access data from the USFS AirFire database of monitoring data.

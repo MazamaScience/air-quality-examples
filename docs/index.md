@@ -12,7 +12,7 @@ Source code for generating all reports and this site is available at:
 
 ### [Chelan Douglas Health District](./2024/Chelan-Douglas_Health_District)
 
-Reports summarizing monitoring data avialable each smoke season in Chelan,
+Reports summarizing monitoring data available each smoke season in Chelan,
 Douglas and Okanogan counties in north central Washington state. A summary
 page has tables of the number of days each monitoring site spent in each
 Air Quality Category.

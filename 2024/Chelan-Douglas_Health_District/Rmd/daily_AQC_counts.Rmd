@@ -33,15 +33,6 @@ the rightmost column.
 
 ```{r year_loop, results = "asis"}
 
-# # Define a function to convert numeric values into AQC categories
-# pm25_to_AQC <- function(x) {
-#   aqc <-
-#     cut(x, breaks = US_AQI$breaks_PM2.5, labels = US_AQI$names_eng)
-#   return(aqc)
-# }
-# 
-# baseUrl <- "http://smoke.mazamascience.com/Liz_Walker/CDHD_report/monitoring_data"
-
 baseUrl <- "."
 
 for ( year in 2014:2023 ) {
