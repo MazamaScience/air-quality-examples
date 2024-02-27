@@ -22,5 +22,5 @@ Air Quality Category.
 Tables and plots summarizing the cumulative number of days PM2.5 monitors
 spent in each Air Quality Category during a given month. These tables and plots
 are calculated using existing (2023) and updated (2024) NAAQS and allow for an
-easy review of the impact of the updated NAAWQS. Each report covers one state 
+easy review of the impact of the updated NAAQS. Each report covers one state 
 for a given month with tables and plots for the years 2014 to 2023.
