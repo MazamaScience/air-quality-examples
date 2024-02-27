@@ -47,4 +47,5 @@ global_vars.R
 .DS_Store
 
 data/*.rda
+data/*.log
 
