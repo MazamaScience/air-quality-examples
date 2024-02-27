@@ -33,8 +33,10 @@ NAAQS and allow for an easy review of the impact of the updated NAAWQS. Each
 report covers one state for a given month with tables and plots for the years 
 2014 to 2023.
 
-### Georgia
 
+| State | Months |
+| ----- | ------ |
+| **Georgia** |
 [Jan](./daily_AQC_tables_GA_01.html)
 [Feb](./daily_AQC_tables_GA_02.html)
 [Mar](./daily_AQC_tables_GA_03.html)
@@ -47,6 +49,8 @@ report covers one state for a given month with tables and plots for the years
 [Oct](./daily_AQC_tables_GA_10.html)
 [Nov](./daily_AQC_tables_GA_11.html)
 [Dec](./daily_AQC_tables_GA_12.html)
+|
+
 
 _Note that these reports do not include data from temporary monitors._
 
