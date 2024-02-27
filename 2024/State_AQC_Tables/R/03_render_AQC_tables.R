@@ -14,24 +14,35 @@ if ( packageVersion("AirMonitor") < "0.4.0" ) {
   stop("VERSION_ERROR:  Please upgrade to AirMonitor 0.4.0 or later.")
 }
 
+library(MazamaCoreUtils)
+
+logger.setLevel(INFO)
+
 # ----- Render daily_AQC_tables reports ----------------------------------------
 
-for ( month in 4:4 ) {
+stateCodes <- c("GA", "OH", "UT", "OR", "NC")
+
+for ( stateCode in stateCodes ) {
   
-  params <- 
-    list(
-      stateCode = "GA",
-      timezone = "America/New_York",
-      month = month
+  for ( month in 1:12 ) {
+
+    logger.info("Generating AQC Tables for %s, %02d", stateCode, month)
+    
+    params <- 
+      list(
+        stateCode = "GA",
+        month = month
+      )
+    
+    # This path is relative to the Rmd/ directory
+    htmlPath <- sprintf("./html/daily_AQC_tables_%s_%02d.html", stateCode, month)
+    
+    rmarkdown::render(
+      input = 'Rmd/daily_AQC_tables.Rmd',
+      params = params,
+      output_file = htmlPath
     )
-  
-  # This path is relative to the Rmd/ directory
-  htmlPath <- sprintf("./html/daily_AQC_tables_%s_%02d.html", stateCode, month)
-  
-  rmarkdown::render(
-    input = 'Rmd/daily_AQC_tables.Rmd',
-    params = params,
-    output_file = htmlPath
-  )
+    
+  }
   
 }
