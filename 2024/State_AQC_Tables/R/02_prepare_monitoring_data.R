@@ -7,8 +7,8 @@
 VERSION = "1.0.0"
 
 # Check that the working directory is set properly
-if ( !stringr::str_detect(getwd(), "state_AQC_Tables$") ) {
-  stop("WD_ERROR:  Please set the working directory to 'state_AQC_Tables/'")
+if ( !stringr::str_detect(getwd(), "State_AQC_Tables$") ) {
+  stop("WD_ERROR:  Please set the working directory to 'State_AQC_Tables/'")
 }
 
 if ( packageVersion("AirMonitor") < "0.4.0" ) {

@@ -6,8 +6,8 @@
 # ----- Setup ------------------------------------------------------------------
 
 # Check that the working directory is set properly
-if ( !stringr::str_detect(getwd(), "state_AQC_tables$") ) {
-  stop("WD_ERROR:  Please set the working directory to 'state_AQC_tables/'")
+if ( !stringr::str_detect(getwd(), "State_AQC_Tables$") ) {
+  stop("WD_ERROR:  Please set the working directory to 'State_AQC_Tables/'")
 }
 
 if ( packageVersion("AirMonitor") < "0.4.0" ) {
@@ -16,15 +16,22 @@ if ( packageVersion("AirMonitor") < "0.4.0" ) {
 
 # ----- Render daily_AQC_tables reports ----------------------------------------
 
-for ( year in 2014:2023 ) {
+for ( month in 4:4 ) {
   
-  params <- list(year = year)
+  params <- 
+    list(
+      stateCode = "GA",
+      timezone = "America/New_York",
+      month = month
+    )
   
   # This path is relative to the Rmd/ directory
-  htmlPath <- sprintf("./html/monitoring_data_%d.html", year)
+  htmlPath <- sprintf("./html/daily_AQC_tables_%s_%02d.html", stateCode, month)
   
-  rmarkdown::render(input = 'Rmd/monitoring_data.Rmd',
-                    params = params,
-                    output_file = htmlPath)
+  rmarkdown::render(
+    input = 'Rmd/daily_AQC_tables.Rmd',
+    params = params,
+    output_file = htmlPath
+  )
   
 }
