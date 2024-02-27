@@ -1,0 +1,119 @@
+---
+title: "Air Quality Category Tables"
+output:
+  html_document: 
+    css: report_styles.css
+---
+
+Processed on `r paste(lubridate::now(),format(lubridate::now(), "%Z"))`.
+
+----
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, error = FALSE)
+
+suppressPackageStartupMessages({
+  library(AirMonitor)
+})
+
+stateCode <- "GA"
+timezone <- "America/New_York"
+month <- 4
+
+monthName <- 
+  MazamaCoreUtils::parseDatetime(
+    sprintf("2024%02d15", month), 
+    timezone = "America/New_York"
+  ) %>% 
+  strftime("%B", tzone = timezone)
+
+stateName <-
+  MazamaSpatialUtils::US_stateCodeToName(stateCode)
+
+```
+
+_Disclaimer: Data presented here come from a variety of sources and do not 
+represent official EPA measurements. Please visit
+[AirNow](https://www.airnow.gov) for official measurements._
+
+----
+
+```{r state_name, results = "asis"}
+  cat(sprintf("\n\n# %s\n", stateName))
+```
+ 
+
+The following tables summarize the cumulative number of days each site spent in 
+each AQI category during the the month of `r monthName`. Tables include only
+permanent monitors.
+
+
+```{r year_loop, results = "asis"}
+
+# NOTE:  No monitoring data in Georgia before 2016
+for ( year in 2016:2023 ) {
+  
+  startString <- sprintf("%d%02d01", year, month)
+  startdate <- MazamaCoreUtils::parseDatetime(startString, timezone = timezone)
+  enddate <- startdate + lubridate::ddays(40)
+  lubridate::day(enddate) <- 1
+  
+  # ----- Assemble data --------------------------------------------------------
+  
+  # NOTE:  These paths are relative to the Rmd/ directory
+  airnow <- get(load(sprintf("../data/airnow_%d.rda", year)))
+  
+  monitor <-
+    airnow %>%
+    monitor_filter(stateCode == "GA") %>%
+    monitor_filterDate(startdate, enddate) %>%
+    monitor_filter(deploymentType == "Permanent") %>%
+    monitor_dropEmpty()
+  
+  cat(sprintf("\n\n## %d\n", year))
+  cat(sprintf("\nIn %s %d, %d permanent monitors were deployed.\n", monthName, year, nrow(monitor$meta)))
+
+  # ----- Create table ---------------------------------------------------------
+  
+  oldAQCSummary <-
+    monitor %>%
+    monitor_dailyStatistic(
+      FUN = mean,
+      na.rm = TRUE,
+      minHours = 18,
+      dayBoundary = c("LST")
+    ) %>%
+    monitor_dropEmpty() %>%
+    monitor_toAQCTable(NAAQS = "PM2.5") %>%
+    colSums()
+  
+  newAQCSummary <-
+    monitor %>%
+    monitor_dailyStatistic(
+      FUN = mean,
+      na.rm = TRUE,
+      minHours = 18,
+      dayBoundary = c("LST")
+    ) %>%
+    monitor_dropEmpty() %>%
+    monitor_toAQCTable(NAAQS = "PM2.5_2024") %>%
+    colSums()
+  
+  dailyAQCTable <- 
+    dplyr::bind_rows(oldAQCSummary, newAQCSummary) %>%
+    as.data.frame()
+  
+  rownames(dailyAQCTable) <- c("Old", "New")
+  
+  
+  # ----- Print table ----------------------------------------------------------
+  
+  print(knitr::kable(
+    dailyAQCTable, 
+    caption = "Air Quality Categories under Old (2023) and New (2024) NAAQS"
+  ))
+  
+}
+```
+
+
