@@ -34,9 +34,8 @@ report covers one state for a given month with tables and plots for the years
 2014 to 2023.
 
 
-| State | Months |
-| ----- | ------ |
-| **Georgia** |
+### Georgia
+
 [Jan](./daily_AQC_tables_GA_01.html)
 [Feb](./daily_AQC_tables_GA_02.html)
 [Mar](./daily_AQC_tables_GA_03.html)
@@ -49,7 +48,72 @@ report covers one state for a given month with tables and plots for the years
 [Oct](./daily_AQC_tables_GA_10.html)
 [Nov](./daily_AQC_tables_GA_11.html)
 [Dec](./daily_AQC_tables_GA_12.html)
-|
+
+
+### North Carolina
+
+[Jan](./daily_AQC_tables_NC_01.html)
+[Feb](./daily_AQC_tables_NC_02.html)
+[Mar](./daily_AQC_tables_NC_03.html)
+[Apr](./daily_AQC_tables_NC_04.html)
+[May](./daily_AQC_tables_NC_05.html)
+[Jun](./daily_AQC_tables_NC_06.html)
+[Jul](./daily_AQC_tables_NC_06.html)
+[Aug](./daily_AQC_tables_NC_08.html)
+[Sep](./daily_AQC_tables_NC_09.html)
+[Oct](./daily_AQC_tables_NC_10.html)
+[Nov](./daily_AQC_tables_NC_11.html)
+[Dec](./daily_AQC_tables_NC_12.html)
+
+
+### Ohio
+
+[Jan](./daily_AQC_tables_OH_01.html)
+[Feb](./daily_AQC_tables_OH_02.html)
+[Mar](./daily_AQC_tables_OH_03.html)
+[Apr](./daily_AQC_tables_OH_04.html)
+[May](./daily_AQC_tables_OH_05.html)
+[Jun](./daily_AQC_tables_OH_06.html)
+[Jul](./daily_AQC_tables_OH_06.html)
+[Aug](./daily_AQC_tables_OH_08.html)
+[Sep](./daily_AQC_tables_OH_09.html)
+[Oct](./daily_AQC_tables_OH_10.html)
+[Nov](./daily_AQC_tables_OH_11.html)
+[Dec](./daily_AQC_tables_OH_12.html)
+
+
+### Oregon
+
+[Jan](./daily_AQC_tables_OR_01.html)
+[Feb](./daily_AQC_tables_OR_02.html)
+[Mar](./daily_AQC_tables_OR_03.html)
+[Apr](./daily_AQC_tables_OR_04.html)
+[May](./daily_AQC_tables_OR_05.html)
+[Jun](./daily_AQC_tables_OR_06.html)
+[Jul](./daily_AQC_tables_OR_06.html)
+[Aug](./daily_AQC_tables_OR_08.html)
+[Sep](./daily_AQC_tables_OR_09.html)
+[Oct](./daily_AQC_tables_OR_10.html)
+[Nov](./daily_AQC_tables_OR_11.html)
+[Dec](./daily_AQC_tables_OR_12.html)
+
+
+### Utah
+
+[Jan](./daily_AQC_tables_UT_01.html)
+[Feb](./daily_AQC_tables_UT_02.html)
+[Mar](./daily_AQC_tables_UT_03.html)
+[Apr](./daily_AQC_tables_UT_04.html)
+[May](./daily_AQC_tables_UT_05.html)
+[Jun](./daily_AQC_tables_UT_06.html)
+[Jul](./daily_AQC_tables_UT_06.html)
+[Aug](./daily_AQC_tables_UT_08.html)
+[Sep](./daily_AQC_tables_UT_09.html)
+[Oct](./daily_AQC_tables_UT_10.html)
+[Nov](./daily_AQC_tables_UT_11.html)
+[Dec](./daily_AQC_tables_UT_12.html)
+
+
 
 
 _Note that these reports do not include data from temporary monitors._
