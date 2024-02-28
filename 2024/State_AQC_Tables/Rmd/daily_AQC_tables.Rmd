@@ -77,7 +77,9 @@ for ( year in 2014:2023 ) {
   
   monitor <-
     airnow %>%
-    monitor_filter(stateCode == !!stateCode)
+    monitor_filter(stateCode == !!stateCode) %>%
+    # NOT:  monitor_dailyStatistic() requires a single timezone
+    monitor_filter(timezone == !!timezone)
   
   cat(sprintf("\n\n## %s %d -- %d permanent monitors\n", monthName, year, nrow(monitor$meta)))
   
@@ -167,11 +169,11 @@ for ( year in 2014:2023 ) {
         bty = 'n'
       )
         
-      }, silent = FALSE)
+      }, silent = TRUE)
       
       if ( "try-error" %in% class(result) ) {
         
-        cat(sprintf("\n`Insufficient data to calculate tables.`\n"))
+        cat(sprintf("\n`Processing error:  Unable to calculate tables.`\n"))
  
       }
       
