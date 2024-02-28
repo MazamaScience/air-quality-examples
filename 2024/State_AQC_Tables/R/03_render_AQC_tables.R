@@ -20,7 +20,7 @@ logger.setLevel(INFO)
 
 # ----- Render daily_AQC_tables reports ----------------------------------------
 
-stateCodes <- c("GA", "OH", "UT", "OR", "NC")
+stateCodes <- c("MD", "VA", "WA")
 
 for ( stateCode in stateCodes ) {
   

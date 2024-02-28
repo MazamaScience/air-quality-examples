@@ -50,6 +50,22 @@ report covers one state for a given month with tables and plots for the years
 [Dec](./daily_AQC_tables_GA_12.html)
 
 
+### Maryland
+
+[Jan](./daily_AQC_tables_MD_01.html)
+[Feb](./daily_AQC_tables_MD_02.html)
+[Mar](./daily_AQC_tables_MD_03.html)
+[Apr](./daily_AQC_tables_MD_04.html)
+[May](./daily_AQC_tables_MD_05.html)
+[Jun](./daily_AQC_tables_MD_06.html)
+[Jul](./daily_AQC_tables_MD_06.html)
+[Aug](./daily_AQC_tables_MD_08.html)
+[Sep](./daily_AQC_tables_MD_09.html)
+[Oct](./daily_AQC_tables_MD_10.html)
+[Nov](./daily_AQC_tables_MD_11.html)
+[Dec](./daily_AQC_tables_MD_12.html)
+
+
 ### North Carolina
 
 [Jan](./daily_AQC_tables_NC_01.html)
@@ -112,6 +128,38 @@ report covers one state for a given month with tables and plots for the years
 [Oct](./daily_AQC_tables_UT_10.html)
 [Nov](./daily_AQC_tables_UT_11.html)
 [Dec](./daily_AQC_tables_UT_12.html)
+
+
+### Virgina
+
+[Jan](./daily_AQC_tables_VA_01.html)
+[Feb](./daily_AQC_tables_VA_02.html)
+[Mar](./daily_AQC_tables_VA_03.html)
+[Apr](./daily_AQC_tables_VA_04.html)
+[May](./daily_AQC_tables_VA_05.html)
+[Jun](./daily_AQC_tables_VA_06.html)
+[Jul](./daily_AQC_tables_VA_06.html)
+[Aug](./daily_AQC_tables_VA_08.html)
+[Sep](./daily_AQC_tables_VA_09.html)
+[Oct](./daily_AQC_tables_VA_10.html)
+[Nov](./daily_AQC_tables_VA_11.html)
+[Dec](./daily_AQC_tables_VA_12.html)
+
+
+### Washington
+
+[Jan](./daily_AQC_tables_WA_01.html)
+[Feb](./daily_AQC_tables_WA_02.html)
+[Mar](./daily_AQC_tables_WA_03.html)
+[Apr](./daily_AQC_tables_WA_04.html)
+[May](./daily_AQC_tables_WA_05.html)
+[Jun](./daily_AQC_tables_WA_06.html)
+[Jul](./daily_AQC_tables_WA_06.html)
+[Aug](./daily_AQC_tables_WA_08.html)
+[Sep](./daily_AQC_tables_WA_09.html)
+[Oct](./daily_AQC_tables_WA_10.html)
+[Nov](./daily_AQC_tables_WA_11.html)
+[Dec](./daily_AQC_tables_WA_12.html)
 
 
 
