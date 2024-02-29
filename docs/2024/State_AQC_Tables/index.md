@@ -34,7 +34,6 @@ report covers one state for a given month with tables and plots for the years
 2014 to 2023.
 
 
- FALSE
 ### Alabama
 
 [Jan](./daily_AQC_tables_AL_01.html)

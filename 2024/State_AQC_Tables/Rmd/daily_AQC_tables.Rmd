@@ -88,8 +88,8 @@ for ( year in 2014:2023 ) {
     
     monitor <-
       monitor %>%
-      monitor_filter(deploymentType != "Temporary") %>%
-      monitor_filterDate(startdate, enddate)
+      monitor_filterDate(startdate, enddate) %>%
+      monitor_filter(deploymentType != "Temporary")
     
     # Continue only if there is data
     if ( !monitor_isEmpty(monitor) ) {
