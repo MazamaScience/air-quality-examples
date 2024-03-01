@@ -1,0 +1,147 @@
+---
+  title: "Air Quality Category Tables"
+  output:
+    html_document: 
+    css: report_styles.css
+---
+
+Processed on `r paste(lubridate::now(),format(lubridate::now(), "%Z"))`.
+
+----
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, error = FALSE)
+
+suppressPackageStartupMessages({
+  library(AirMonitor)
+})
+
+timezone <- "America/Los_Angeles"
+```
+
+_Disclaimer: Data presented here come from a variety of sources and do not 
+represent official EPA measurements. Please visit
+[AirNow](https://www.airnow.gov) for official measurements._
+
+----
+
+
+The following tables summarize the cumulative number of days air quality monitors spent in 
+each AQI category during wildfire season.
+
+The 'Old' table and barplot are calculated using the 2023 PM~2.5~ NAAQS while the 
+'New' table and barplot are calculated using the 2024 PM~2.5~ NAAQS.
+
+
+```{r year_loop, results = "asis", fig.width = 10, fig.height = 3, fig.align = "left"}
+
+CDHD_monitor <- get(load("../data/CDHD_daily_smoke_season.rda"))
+
+for ( year in 2012:2022 ) {
+  
+  cat(sprintf("\n\n# %d", year))
+  
+  # Define the smoke season for this year
+  startString <- sprintf("%d0701", year)
+  startdate <- MazamaCoreUtils::parseDatetime(startString, timezone = timezone)
+  endString <- sprintf("%d1101", year)
+  enddate <- MazamaCoreUtils::parseDatetime(endString, timezone = timezone)
+  
+  # ----- Assemble data --------------------------------------------------------
+  
+  monitor <-
+    CDHD_monitor %>%
+    monitor_filterDate(startdate, enddate)
+  
+  # Continue only if there is data
+  if ( !monitor_isEmpty(monitor) ) {
+    
+    result <- try({
+      
+      # ----- Create table for old NAAQS ---------------------------------------
+      
+      oldAQCTable <-
+        monitor %>%
+        monitor_dropEmpty() %>%
+        monitor_toAQCTable(NAAQS = "PM2.5")
+      
+      
+      cat(sprintf("\n\n**Using Old (2023) PM~2.5~ NAAQS**"))
+  
+      print(knitr::kable(
+        oldAQCTable,
+        format = "html", table.attr = "style='width:95%; font-size:1.5rem; margin: 20px 60px 20px 15px; line-height:2em'"
+      ))
+      
+      # ----- Create table for old NAAQS ---------------------------------------
+      
+      newAQCTable <-
+        monitor %>%
+        monitor_dropEmpty() %>%
+        monitor_toAQCTable(NAAQS = "PM2.5_2024")
+      
+      cat(sprintf("\n\n**Using New (2024) PM~2.5~ NAAQS**"))
+  
+      print(knitr::kable(
+        newAQCTable,
+        format = "html", table.attr = "style='width:95%; font-size:1.5rem; margin: 20px 60px 20px 15px; line-height:2em'"
+      ))
+      
+      # ----- Cumulative barplot -----------------------------------------------
+      
+      newAQCSummary <-
+        newAQCTable %>%
+        colSums()
+      
+      oldAQCSummary <-
+        oldAQCTable %>%
+        colSums()
+      
+      # Reorder so that the horizontal barplot ends up with Old on top
+      df_barplot <-
+        dplyr::bind_rows(newAQCSummary, oldAQCSummary) %>%
+        as.data.frame()
+
+      rownames(df_barplot) <- c("New", "Old")
+
+      ###cat(sprintf("\n\n**Cumulative days across all monitors**"))
+
+      par(mar = c(1,3,3,1) + 0.1)
+
+      barplot(
+        as.matrix(t(df_barplot)),
+        col = c(US_AQI$colors_EPA, "gray90"),
+        horiz = TRUE,
+        las = 1,
+        ylim = c(0, 1.5),
+        width = 0.5,
+        axes = FALSE
+      )
+
+      title("Cumulative days across all monitors")
+
+      legend(
+        "top",
+        legend = c(US_AQI$names_eng, "Missing"),
+        fill = c(US_AQI$colors_EPA, "gray90"),
+        horiz = TRUE,
+        cex = 0.8,
+        bty = 'n'
+      )
+      
+      par(mar = c(5,4,4,2) + 0.1)
+
+    }, silent = TRUE)
+    
+    if ( "try-error" %in% class(result) ) {
+      
+      cat(sprintf("\n`Processing error:  Unable to calculate tables.`\n"))
+      
+    }
+    
+  }
+  
+}
+```
+
+
