@@ -1,8 +1,9 @@
 ---
-  title: "Air Quality Category Tables"
-  output:
-    html_document: 
-    css: report_styles.css
+title: "Air Quality Category Tables"
+output:
+  word_document: default
+  css: report_styles.css
+  html_document: null
 ---
 
 Processed on `r paste(lubridate::now(),format(lubridate::now(), "%Z"))`.

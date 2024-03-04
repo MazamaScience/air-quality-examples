@@ -20,10 +20,8 @@ logger.setLevel(INFO)
 
 # ----- Render daily_AQC_tables reports ----------------------------------------
 
-# skipTheseCodes <- c("DC", "PR")
-# stateCodes <- setdiff(AirMonitor::US_52, skipTheseCodes)
-
-stateCodes <- c("NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY")
+skipTheseCodes <- c("DC", "PR")
+stateCodes <- setdiff(AirMonitor::US_52, skipTheseCodes)
 
 for ( stateCode in stateCodes ) {
   

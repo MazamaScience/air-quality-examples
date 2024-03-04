@@ -47,20 +47,22 @@ represent official EPA measurements. Please visit
 
 ----
 
-```{r state_name, results = "asis"}
-cat(sprintf("\n\n# %s in %s\n", monthName, stateName))
-```
+Cumulative exposure to smoke is an important public health metric. This report 
+summarizes the cumulative number of days air quality monitors in `r stateName` 
+spent in each AQI category during the the month of `r monthName`.
 
+The tables below include only permanent monitors measuring PM~2.5~ and show 
+cumulative exposure under existing NAAQS (National Ambient Air Quality
+Standards) and under the 
+[2024 revised standards for PM2.5](https://www.epa.gov/pm-pollution/final-reconsideration-national-ambient-air-quality-standards-particulate-matter-pm).
 
-The following tables summarize the cumulative number of days air quality monitors spent in 
-each AQI category during the the month of `r monthName`. Tables include only
-permanent monitors.
-
-The 'Old' row is calculated using the 2023 PM~2.5~ NAAQS while the 'New' row is
-calculated using the 2024 PM~2.5~ NAAQS.
-
+In the tables and plots below, 'Old' designates cumulative days calculated using 
+the 2023 PM~2.5~ NAAQS while 'New' is calculated using the 2024 revised PM~2.5~ 
+NAAQS. The impact of the NAAQS revision is quite clear.
 
 ```{r year_loop, results = "asis", fig.width = 10, fig.height = 3, fig.align = "left"}
+
+cat(sprintf("\n\n## %s in %s\n", monthName, stateName))
 
 for ( year in 2014:2023 ) {
   
@@ -81,7 +83,11 @@ for ( year in 2014:2023 ) {
     # NOT:  monitor_dailyStatistic() requires a single timezone
     monitor_filter(timezone == !!timezone)
   
-  cat(sprintf("\n\n## %s %d -- %d permanent monitors\n", monthName, year, nrow(monitor$meta)))
+  if ( nrow(monitor$meta) == 0 ) {
+    cat(sprintf("\n\n### %s %d -- %d monitors in AirFire data archive\n", monthName, year, nrow(monitor$meta)))
+  } else {
+    cat(sprintf("\n\n### %s %d -- %d permanent monitors\n", monthName, year, nrow(monitor$meta)))
+  }
   
   # Continue only if there is data
   if ( !monitor_isEmpty(monitor) ) {
