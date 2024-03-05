@@ -8,13 +8,6 @@ represent official EPA measurements. Please visit
 
 ---
 
-The US EPA recently announced updated NAAQS (National Ambient Air Quality
-Standards) for PM2.5. The lowered thresholds will result in a change in the 
-number of days in a particular Air Quality Category (AQC).
-
-The number of days a community spends in each category is a useful health
-statistic.
-
 The US EPA defines the following Air Quality Categories:
 
 * Good -- Air quality is satisfactory, and air pollution poses little or no risk.
@@ -24,12 +17,17 @@ The US EPA defines the following Air Quality Categories:
 * Very Unhealthy -- Health alert: The risk of health effects is increased for everyone.
 * Hazardous -- Health warning of emergency conditions: everyone is more likely to be affected.
 
+The number of days a community spends in each category is a useful health
+statistic.  The US EPA recently announced updated NAAQS (National Ambient Air Quality
+Standards) for PM2.5. The lowered thresholds will result in a change in the 
+number of days communities experience each Air Quality Category (AQC).
+
 ## Daily AQC Reports by State and Month
 
-The following table provides linnks to reports summarizing the cumulative number 
+The following table provides links to reports summarizing the cumulative number 
 of days PM2.5 monitors spent in each Air Quality Category during a given month. 
 These tables and plots are calculated using existing (2023) and updated (2024) 
-NAAQS and allow for an easy review of the impact of the updated NAAWQS. Each 
+PM2.5 NAAQS and allow for an easy review of the impact of the updated NAAWQS. Each 
 report covers one state for a given month with tables and plots for the years 
 2014 to 2023.
 
