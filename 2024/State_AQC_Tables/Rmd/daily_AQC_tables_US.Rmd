@@ -25,8 +25,8 @@ represent official EPA measurements. Please visit
 ----
 
 Cumulative exposure to smoke is an important public health metric. This report 
-summarizes the cumulative number of days US air quality monitors  
-spent in each AQI category each year.
+summarizes the cumulative number of days US air quality monitors spent in each
+AQI category each year.
 
 The tables below include only permanent monitors measuring PM~2.5~ and show 
 cumulative exposure under existing NAAQS (National Ambient Air Quality
