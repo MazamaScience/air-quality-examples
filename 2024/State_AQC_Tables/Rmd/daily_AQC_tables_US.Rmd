@@ -1,0 +1,168 @@
+---
+title: "Air Quality Category Tables"
+output:
+  html_document: 
+    css: report_styles.css
+---
+
+Processed on `r paste(lubridate::now(),format(lubridate::now(), "%Z"))`.
+
+----
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, error = FALSE)
+
+suppressPackageStartupMessages({
+  library(AirMonitor)
+})
+
+```
+
+_Disclaimer: Data presented here come from a variety of sources and do not 
+represent official EPA measurements. Please visit
+[AirNow](https://www.airnow.gov) for official measurements._
+
+----
+
+Cumulative exposure to smoke is an important public health metric. This report 
+summarizes the cumulative number of days US air quality monitors  
+spent in each AQI category each year.
+
+The tables below include only permanent monitors measuring PM~2.5~ and show 
+cumulative exposure under existing NAAQS (National Ambient Air Quality
+Standards) and under the 
+[2024 revised standards for PM2.5](https://www.epa.gov/pm-pollution/final-reconsideration-national-ambient-air-quality-standards-particulate-matter-pm).
+
+In the tables and plots below, 'Old' designates cumulative days calculated using 
+the 2023 PM~2.5~ NAAQS while 'New' is calculated using the 2024 revised PM~2.5~ 
+NAAQS. The impact of the NAAQS revision is quite clear.
+
+```{r year_loop, results = "asis", fig.width = 10, fig.height = 3, fig.align = "left"}
+
+cat(sprintf("\n\n## US annual\n"))
+
+for ( year in 2014:2023 ) {
+  
+  # NOTE:  These paths are relative to the Rmd/ directory
+  airnow <- 
+    get(load(sprintf("../data/airnow_%d.rda", year))) %>%
+    monitor_filter(deploymentType != "Temporary")
+  
+  cat(sprintf("\n\n### %d -- %d permanent monitors in AirFire data archive\n", year, nrow(airnow$meta)))
+  
+  oldAQCList <- list()
+  newAQCList <- list()
+  
+  # ===== BEGIN timezone loop ==================================================
+  for ( timezone in unique(airnow$meta$timezone) ) {
+    
+    startString <- sprintf("%d0101", year)
+    startdate <- MazamaCoreUtils::parseDatetime(startString, timezone = timezone)
+    enddate <- startdate + lubridate::dyears(1)
+    
+    monitor <-
+      airnow %>%
+      # NOTE:  monitor_dailyStatistic() requires a single timezone
+      monitor_filter(timezone == !!timezone) %>%
+      monitor_filterDate(startdate, enddate)
+    
+    if ( !monitor_isEmpty(monitor) ) {
+      
+      oldAQCList[[timezone]] <-
+        monitor %>%
+        monitor_dailyStatistic(
+          FUN = mean,
+          na.rm = TRUE,
+          minHours = 18,
+          dayBoundary = c("LST")
+        ) %>%
+        monitor_dropEmpty() %>%
+        monitor_toAQCTable(
+          NAAQS = "PM2.5",
+          siteIdentifier = "deviceDeploymentID"
+        ) %>%
+        dplyr::as_tibble()
+      
+      newAQCList[[timezone]] <-
+        monitor %>%
+        monitor_dailyStatistic(
+          FUN = mean,
+          na.rm = TRUE,
+          minHours = 18,
+          dayBoundary = c("LST")
+        ) %>%
+        monitor_dropEmpty() %>%
+        monitor_toAQCTable(
+          NAAQS = "PM2.5_2024",
+          siteIdentifier = "deviceDeploymentID"
+        ) %>%
+        dplyr::as_tibble()
+      
+    }
+    
+  }
+  # ===== END timezone loop ====================================================
+  
+  # Annual summaries
+  oldAQCSummary <-
+    oldAQCList %>%
+    dplyr::bind_rows() %>%
+    colSums()
+  
+  newAQCSummary <-
+    newAQCList %>%
+    dplyr::bind_rows() %>%
+    colSums()
+  
+  dailyAQCTable <- 
+    dplyr::bind_rows(oldAQCSummary, newAQCSummary) %>%
+    as.data.frame()
+  
+  rownames(dailyAQCTable) <- c("Old", "New")
+  
+  # ----- Print table ----------------------------------------------------------
+  
+  print(knitr::kable(
+    dailyAQCTable,
+    format = "html", table.attr = "style='width:95%; font-size:1.5rem; margin: 20px 60px 0px 15px; line-height:2em'"
+  ))
+  
+  # ----- Create barplot -------------------------------------------------------
+  
+  # Reorder so that the horizontal barplot ends up with Old on top 
+  df_barplot <-
+    dplyr::bind_rows(newAQCSummary, oldAQCSummary) %>%
+    as.data.frame()
+  
+  rownames(df_barplot) <- c("New", "Old")
+  
+  par(mar = c(1,3,3,1) + 0.1)
+  
+  barplot(
+    as.matrix(t(df_barplot)),
+    col = c(US_AQI$colors_EPA, "gray90"),
+    horiz = TRUE,
+    las = 1,
+    ylim = c(0, 1.5),
+    width = 0.5,
+    axes = FALSE
+  )
+  
+  par(mar = c(5,4,4,2) + 0.1)
+  
+  # title("Title goes here")
+  
+  legend(
+    "top",
+    legend = c(US_AQI$names_eng, "Missing"),
+    fill = c(US_AQI$colors_EPA, "gray90"),
+    horiz = TRUE,
+    cex = 0.8,
+    bty = 'n'
+  )
+  
+}
+# END year loop
+```
+
+

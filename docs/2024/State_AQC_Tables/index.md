@@ -22,6 +22,11 @@ statistic.  The US EPA recently announced updated NAAQS (National Ambient Air Qu
 Standards) for PM2.5. The lowered thresholds will result in a change in the 
 number of days communities experience each Air Quality Category (AQC).
 
+## US Annual Daily AQC Report
+
+A nation-wide summary of cumulative Air Quality Category days each year is available in
+the [US Annual report](./daily_AQC_tables_US.html).
+
 ## Daily AQC Reports by State and Month
 
 The following table provides links to reports summarizing the cumulative number 
